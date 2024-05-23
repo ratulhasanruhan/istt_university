@@ -1,9 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:istt_university/util/colors.dart';
 import 'package:istt_university/util/constants.dart';
+import 'package:istt_university/view/Home.dart';
+import 'package:istt_university/view/Infos.dart';
+import 'package:istt_university/view/Login.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'controller/HomeController.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -47,13 +53,104 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final HomeController homeController = Get.put(HomeController());
+
+  List<PersistentBottomNavBarItem> items() {
+    return [
+      PersistentBottomNavBarItem(
+        inactiveIcon: SvgPicture.asset(
+          "assets/icon_home_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        icon: SvgPicture.asset(
+          "assets/icon_home_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        activeColorPrimary: Color(0xFF42C8B8),
+        inactiveColorPrimary: Color(0xFF4D4D4D),
+        title: "HOME",
+      ),
+      PersistentBottomNavBarItem(
+        inactiveIcon: SvgPicture.asset(
+          "assets/icon_course_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        icon: SvgPicture.asset(
+          "assets/icon_course_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        activeColorPrimary: Color(0xFFE09040),
+        inactiveColorPrimary: Color(0xFF4D4D4D),
+        title: "INFO",
+      ),
+      PersistentBottomNavBarItem(
+        inactiveIcon: SvgPicture.asset(
+          "assets/icon_account_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        icon: SvgPicture.asset(
+          "assets/icon_account_active.svg",
+          height: 19,
+          width: 19,
+        ),
+        activeColorPrimary: Color(0xFF965DB0),
+        inactiveColorPrimary: Color(0xFF4D4D4D),
+        title: "LOGIN",
+      ),
+    ];
+  }
+
+  List<Widget> _screens() {
+    return [
+      Home(),
+      Infos(),
+      Login()
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(app_name),
+      body: PersistentTabView(
+        context,
+        controller: homeController.persistentTabController,
+        screens: _screens(),
+        items: items(),
+        hideNavigationBar: false,
+        navBarHeight: 52,
+        margin: EdgeInsets.all(0),
+        padding: NavBarPadding.symmetric(horizontal: 10),
+        onItemSelected: homeController.changeTabIndex,
+        confineInSafeArea: true,
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          colorBehindNavBar: context.theme.scaffoldBackgroundColor,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: ScreenTransitionAnimation(
+          animateTabTransition: false,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle: NavBarStyle.style3,
       ),
     );
   }
