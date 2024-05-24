@@ -7,7 +7,7 @@ import 'package:istt_university/util/colors.dart';
 import 'package:istt_university/util/constants.dart';
 import 'package:istt_university/view/Home.dart';
 import 'package:istt_university/view/Infos.dart';
-import 'package:istt_university/view/Login.dart';
+import 'package:istt_university/view/Profile.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'controller/HomeController.dart';
 import 'firebase_options.dart';
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return [
       Home(),
       Infos(),
-      Login()
+      Profile()
     ];
   }
 
