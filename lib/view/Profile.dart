@@ -36,7 +36,7 @@ class Profile extends StatelessWidget {
                 height: 250,
                 padding: const EdgeInsets.all(10),
                 child: Center(
-                  child: Image.asset('assets/logo.png'),
+                  child: Image.asset('assets/logo.png',),
                 ),
               );
             },

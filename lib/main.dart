@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:istt_university/util/colors.dart';
 import 'package:istt_university/util/constants.dart';
 import 'package:istt_university/view/Home.dart';
 import 'package:istt_university/view/Infos.dart';
 import 'package:istt_university/view/Profile.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'controller/HomeController.dart';
 import 'firebase_options.dart';
 
@@ -18,6 +20,9 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await Hive.initFlutter();
+  await Hive.openBox('user');
 
   runApp(const MyApp());
 }
@@ -121,17 +126,19 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: homeController.persistentTabController,
         screens: _screens(),
         items: items(),
-        hideNavigationBar: false,
+        hideOnScrollSettings: HideOnScrollSettings(
+          hideNavBarOnScroll: true,
+        ),
         navBarHeight: 52,
         margin: EdgeInsets.all(0),
-        padding: NavBarPadding.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         onItemSelected: homeController.changeTabIndex,
-        confineInSafeArea: true,
+        confineToSafeArea: true,
         backgroundColor: context.theme.scaffoldBackgroundColor,
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: true,
+        hideNavigationBarWhenKeyboardAppears: true,
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
@@ -139,18 +146,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           colorBehindNavBar: context.theme.scaffoldBackgroundColor,
         ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: ItemAnimationProperties(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
+        popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
+        animationSettings: NavBarAnimationSettings(
+          navBarItemAnimation: ItemAnimationSettings(
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 200),
+          ),
+          screenTransitionAnimation: ScreenTransitionAnimationSettings(
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 200),
+            animateTabTransition: false,
+          ),
         ),
-        screenTransitionAnimation: ScreenTransitionAnimation(
-          animateTabTransition: false,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style3,
+        navBarStyle: NavBarStyle.style9,
       ),
     );
   }
