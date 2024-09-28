@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:istt_university/util/colors.dart';
@@ -42,8 +43,8 @@ class Infos extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network(
-                          snapshot.data.docs[index]['icon'],
+                        CachedNetworkImage(
+                          imageUrl: snapshot.data.docs[index]['icon'],
                           width: 80,
                           height: 80,
                         ),
