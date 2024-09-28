@@ -188,24 +188,49 @@ class _HomeState extends State<Home> {
 
                         print(newData);
 
-                        return ListView.builder(
-                          itemCount: newData.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: ClassCard(
-                                courseName: newData[index]['name'],
-                                teacher: newData[index]['teacher'],
-                                room: newData[index]['room'],
-                                note: newData[index]['note'],
-                                startTime: newData[index]['start'].toDate(),
-                                endTime: newData[index]['end'].toDate(),
-                              ),
-                            );
-                          },
-                        );
+                        if(newData.isEmpty){
+                          return Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Lottie.asset(
+                                  'assets/relax.json',
+                                  height: 200,
+                                  width: 200,
+                                ),
+                                Text(
+                                  "NO CLASSES TODAY",
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        else{
+                          return ListView.builder(
+                            itemCount: newData.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: ClassCard(
+                                  courseName: newData[index]['name'],
+                                  teacher: newData[index]['teacher'],
+                                  room: newData[index]['room'],
+                                  note: newData[index]['note'],
+                                  startTime: newData[index]['start'].toDate(),
+                                  endTime: newData[index]['end'].toDate(),
+                                ),
+                              );
+                            },
+                          );
+                        }
                       })
                     ],
                   )
