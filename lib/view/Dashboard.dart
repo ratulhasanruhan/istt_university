@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:istt_university/util/colors.dart';
 import 'package:istt_university/view/AddBatch.dart';
+import 'package:istt_university/view/AddClass.dart';
 import 'package:istt_university/view/Department.dart';
 import 'package:istt_university/view/InfoUrl.dart';
 import 'package:istt_university/view/ProfileView.dart';
@@ -52,7 +53,12 @@ class _DashboardState extends State<Dashboard> {
               borderRadius: BorderRadius.circular(12),
               child: InkWell(
                 onTap: () {
-
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: AddClass(),
+                    withNavBar: true, // OPTIONAL VALUE. True by default.
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Container(

@@ -11,6 +11,7 @@ import 'package:istt_university/util/constants.dart';
 import 'package:istt_university/view/Home.dart';
 import 'package:istt_university/view/Infos.dart';
 import 'package:istt_university/view/Profile.dart';
+import 'package:istt_university/view/UpdateUser.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'controller/HomeController.dart';
 import 'firebase_options.dart';
@@ -26,11 +27,13 @@ void main() async{
   await Hive.openBox('user');
   await Alarm.init();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  var box = Hive.box('user');
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: box.isEmpty ? UpdateUser() :MyHomePage(),
     );
   }
 }

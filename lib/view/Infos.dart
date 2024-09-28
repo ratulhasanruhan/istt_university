@@ -9,13 +9,19 @@ class Infos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+            'ISTT',
+        ),
+        centerTitle: true,
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('info').snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData){
             return GridView.builder(
               itemCount: snapshot.data.docs.length,
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
