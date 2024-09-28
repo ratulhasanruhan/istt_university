@@ -6,7 +6,7 @@
 ## Check it Out
 #### Web: https://istt-uni.web.app/
 
-#### Mobile App: 
+#### Mobile App: https://github.com/ratulhasanruhan/istt_university/releases/download/primary/istt.apk
 
 ## Glimpse
 
