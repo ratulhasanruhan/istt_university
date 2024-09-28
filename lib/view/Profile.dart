@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:istt_university/view/Dashboard.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -12,20 +13,7 @@ class Profile extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if(snapshot.data != null && snapshot.data is User) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Welcome ${snapshot.data.email}'),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await FirebaseAuth.instance.signOut();
-                    },
-                    child: const Text('Sign Out'),
-                  ),
-                ],
-              ),
-            );
+            return Dashboard();
           }
           return SignInScreen(
             showPasswordVisibilityToggle: true,

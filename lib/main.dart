@@ -1,3 +1,4 @@
+import 'package:alarm/alarm.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,6 +24,7 @@ void main() async{
 
   await Hive.initFlutter();
   await Hive.openBox('user');
+  await Alarm.init();
 
   runApp(const MyApp());
 }
@@ -105,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         activeColorPrimary: Color(0xFF965DB0),
         inactiveColorPrimary: Color(0xFF4D4D4D),
-        title: "LOGIN",
+        title: homeController.isLoggedIn.value ? "DASHBOARD" : "LOGIN",
       ),
     ];
   }
