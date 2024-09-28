@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
         return RefreshIndicator(
           onRefresh: () async {
             homeController.getData();
+            homeController.update();
           },
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 30),

@@ -106,7 +106,7 @@ class ClassCard extends StatelessWidget {
               children: [
                 Container(),
                 Text(
-                  '${DateFormat("hh:mm").format(startTime)} - ${DateFormat("hh:mm").format(endTime)}',
+                  '${DateFormat("hh:mm a").format(startTime)} - ${DateFormat("hh:mm a").format(endTime)}',
                   style: GoogleFonts.roboto(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

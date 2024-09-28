@@ -32,7 +32,7 @@ class Infos extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () async{
-                    await launchUrl(Uri.parse(snapshot.data.docs[index]['url']), mode: LaunchMode.inAppBrowserView);
+                    await launchUrl(Uri.parse(snapshot.data.docs[index]['url']), mode: LaunchMode.inAppWebView);
                   },
                   child: Container(
                     decoration: BoxDecoration(

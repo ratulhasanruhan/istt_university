@@ -236,6 +236,7 @@ class _AddClassState extends State<AddClass> {
                         ).then((value) {
                           if(value != null){
                             setState(() {
+                              startTimeController.text = DateFormat('hh:mm a').format(DateTime(selectedDate.year, selectedDate.month, selectedDate.day, value.hour, value.minute));
                               startTime = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, value.hour, value.minute);
                             });
                           }
@@ -263,6 +264,7 @@ class _AddClassState extends State<AddClass> {
                         ).then((value) {
                           if(value != null){
                             setState(() {
+                              endTimeController.text = DateFormat('hh:mm a').format(DateTime(selectedDate.year, selectedDate.month, selectedDate.day, value.hour, value.minute));
                               endTime = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, value.hour, value.minute);
                             });
                           }
@@ -294,6 +296,10 @@ class _AddClassState extends State<AddClass> {
                     });
                   }
                 },
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
+                  backgroundColor: MaterialStateProperty.all(primaryColor),
+                ),
                 child: const Text(
                   'Add Class',
                   style: TextStyle(
@@ -301,10 +307,6 @@ class _AddClassState extends State<AddClass> {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
-                ),
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
-                  backgroundColor: MaterialStateProperty.all(primaryColor),
                 ),
               ),
 
