@@ -3,7 +3,10 @@
 
 ![ISTT](https://www.istt.edu.bd/wp-content/uploads/2022/01/ISTT-Main.png)
 
+## Check it Out
+#### Web: https://istt-uni.web.app/
 
+#### Mobile App: https://github.com/ratulhasanruhan/istt_university/releases/download/primary/istt.apk
 
 ## Glimpse
 
