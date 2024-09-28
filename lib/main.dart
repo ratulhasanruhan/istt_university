@@ -128,6 +128,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: PersistentTabView(
         context,
+        onWillPop: (c) async {
+          if (homeController.persistentTabController.index != 0) {
+            homeController.changeTabIndex(0);
+            return false;
+          }
+          return Future.value(true);
+        },
         controller: homeController.persistentTabController,
         screens: _screens(),
         items: items(),

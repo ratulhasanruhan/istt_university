@@ -123,8 +123,9 @@ class ClassCard extends StatelessWidget {
                         id: Random().nextInt(10) +1,
                         dateTime: startTime.subtract(Duration(minutes: 10)),
                         assetAudioPath: 'assets/alarm.mp3',
-                        loopAudio: true,
+                        loopAudio: false,
                         vibrate: true,
+                        volume: 0.8,
                         notificationTitle: '$courseName class is about to start',
                         notificationBody: 'Room: #$room, Teacher: $teacher',
                       );
